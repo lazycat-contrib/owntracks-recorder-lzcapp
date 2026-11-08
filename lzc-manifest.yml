@@ -12,7 +12,7 @@ application:
       service: owntracks
 services:
   owntracks:
-    # upstream: docker.io/owntracks/recorder:1.0.4
+    # upstream: owntracks/recorder:1.0.4
     image: docker.1ms.run/owntracks/recorder:1.0.4
     environment:
       - TZ=Asia/Shanghai
