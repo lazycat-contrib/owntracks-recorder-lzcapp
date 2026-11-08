@@ -1,0 +1,37 @@
+application:
+  subdomain: owntracks
+  multi_instance: false
+  upstreams:
+    - location: /package-licenses/
+      backend: file:///lzcapp/pkg/content/licenses/
+    - location: /
+      backend: http://owntracks:8083/
+  ingress:
+    - protocol: tcp
+      port: 8083
+      service: owntracks
+services:
+  owntracks:
+    # upstream: docker.io/owntracks/recorder:1.0.4
+    image: docker.1ms.run/owntracks/recorder:1.0.4
+    environment:
+      - TZ=Asia/Shanghai
+    binds:
+      - /lzcapp/var/mutdata:/store
+usage: |
+  OwnTracks Recorder（GPL-2.0）用于存储 OwnTracks 手机应用上报的位置数据，
+  网页端可查看历史轨迹与各设备最近位置（存储目录 /store 已持久化）。
+
+  使用方法：
+  1. 打开应用即是 Recorder 的 Web 视图（首页 last、views 等页面）。
+  2. 数据来源两种：
+     a) 局域网直连：本包开放了 TCP 8083 端口（不经平台入口鉴权），
+        手机 OwnTracks App 选择 HTTP 模式，URL 填 http://<懒猫主机IP>:8083/pub
+        即可直接上报；该端口无鉴权，仅限可信局域网使用。
+     b) 手动导入：也可用 Web 界面或 storage API 导入历史数据。
+  3. Recorder 自身无账号体系，因此未开放 public_path，
+     网页入口由平台鉴权保护（与 dufs/goshs 同判例）。
+
+  说明：
+  - 本包未做实机验证，功能以官方文档为准：https://github.com/owntracks/recorder
+  - 许可证 GPL-2.0，随包分发，见 /package-licenses/。

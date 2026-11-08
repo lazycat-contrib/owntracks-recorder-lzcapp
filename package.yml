@@ -1,0 +1,18 @@
+package: community.lazycat.app.owntracks
+name: OwnTracks Recorder
+version: 1.0.4
+description: "Store and access location data published by OwnTracks apps, with a web view of history and last-seen positions."
+min_os_version: "1.5.0"
+homepage: https://github.com/owntracks/recorder
+author: OwnTracks Project
+license: "GPL-2.0"
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: OwnTracks Recorder
+    description: "存储 OwnTracks 应用上报的位置数据，提供历史轨迹与最近位置的网页视图。"
+  en:
+    name: OwnTracks Recorder
+    description: "Store and access location data published by OwnTracks apps, with a web view of history and last-seen positions."
